@@ -19,10 +19,13 @@ function inputChecker(userChoice) {
     }
     userChoice = userChoice.toUpperCase();
    if (userChoice === "PAPER" || userChoice === "ROCK" || userChoice === "SCISSOR") {
-    console.log ("ready to play")
+    console.log ("ready to play");
+    playerSelection(userChoice);
+    computerSelection(computerChoice);
     }
     else {
         console.log ("no values found. Select between paper rock or scissor")
+        return;
     }
 }
 inputChecker(userChoice);
@@ -31,9 +34,15 @@ function computerChoice () {
     const computerOptions = ['paper','rock','scissors'];
     const choiceNumber = Math.floor(Math.random()*3);
     const computerPlay = computerOptions[choiceNumber];
-    console.log (computerPlay);
+    return computerPlay;
 }
-computerChoice();
 
-
-
+//4- CREATE TWO FUNCTIONS TO USE FOR COMPARE USER VS COMPUTER //
+function playerSelection (userChoice){
+    console.log (userChoice);
+    return userChoice;
+}
+function computerSelection (computerChoice) {
+    console.log (computerChoice());
+    return computerChoice();
+}
