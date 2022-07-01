@@ -19,13 +19,21 @@ function inputChecker(userChoice) {
     }
     userChoice = userChoice.toUpperCase();
    if (userChoice === "PAPER" || userChoice === "ROCK" || userChoice === "SCISSOR") {
-   console.log ("right")
-   return
+    console.log ("ready to play")
     }
     else {
         console.log ("no values found. Select between paper rock or scissor")
     }
 }
 inputChecker(userChoice);
+// 3- CREATE A FUNCTION FOR COMPUTER TO CREATE A RANDOM VALUE BETWEEN: ("PAPER", "ROCK", "SCIZOR")//
+function computerChoice () {
+    const computerOptions = ['paper','rock','scissors'];
+    const choiceNumber = Math.floor(Math.random()*3);
+    const computerPlay = computerOptions[choiceNumber];
+    console.log (computerPlay);
+}
+computerChoice();
+
 
 
