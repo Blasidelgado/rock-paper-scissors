@@ -9,28 +9,23 @@ WE WANT TO CREATE A SIMPLE "ROCK-PAPER-SCISSORS" FOR USERS TO PLAY AGAINST COMPU
 (ALL ROUNDS ARE PLAYED EVEN IF THERE IS ALREADY A WINNER, I.E A 3-0 IN 3 ROUNDS).*/
 
 
-//1- CREATE A VARIABLE AND STORE USER INPUT IN IT.//
-let userChoice = prompt("Paper, Rock or Scissors?" , "");
-userChoice = userChoice.toUpperCase();
 //2- MAKE A HELPER FUNCTION TO AVOID INVALID INPUTS
 function inputChecker(userChoice) {
     if (userChoice === null || userChoice === "") {
-        console.log ("No values found. Reload to try again")
+        alert ("No values found. Reload to try again")
         return;
     }
-   else if (userChoice === "PAPER" || userChoice === "ROCK" || userChoice === "SCISSOR") {
-    console.log ("ready to play");
-    oneRound (playerSelection, computerSelection);
+   else if (userChoice === "PAPER" || userChoice === "ROCK" || userChoice === "SCISSORS") {
+     return;
     }
     else {
-        console.log ("Incorrect. Restart and Select between paper rock or scissor")
+        alert ("Incorrect. Restart and Select between paper rock or scissors")
         return;
     }
 }
-inputChecker(userChoice);
 // 3- CREATE A FUNCTION FOR COMPUTER TO CREATE A RANDOM VALUE BETWEEN: ("PAPER", "ROCK", "SCIZOR")//
-function computerChoice () {
-    const computerOptions = ['PAPER','ROCK','SCISSOR'];
+    function computerChoice () {
+    const computerOptions = ['PAPER','ROCK','SCISSORS'];
     const choiceNumber = Math.floor(Math.random()*3);
     const computerPlay = computerOptions[choiceNumber];
     return computerPlay;
@@ -43,36 +38,56 @@ function playerSelection (userChoice){
 function computerSelection (computerChoice) {
     return computerChoice();
 }
-function oneRound (playerSelection, computerSelection) {
+//5- CREATE MAIN ROUND FUNCTION
+function playRound (playerSelection, computerSelection) {
+    //1- CREATE A VARIABLE AND STORE USER INPUT IN IT.//
+    let userChoice = prompt("Paper, Rock or Scissors?" , "");
+    //1a Make the user input case insensitive
+    userChoice = userChoice.toUpperCase();
+    //1b Helper variable to input in case draw.
+    inputChecker(userChoice);
+    //5a- Game main engine
     if (playerSelection(userChoice) === computerSelection(computerChoice)) {
-        console.log ('draw')
+        alert(`Computer chooses ${userChoice.charAt(0).toUpperCase() + userChoice.slice(1).toLowerCase()}`); alert ("It's a draw.");
         return;
     }
     if ( playerSelection(userChoice) === "PAPER") {
         if (computerSelection(computerChoice) === "ROCK") {
-            console.log ("You win! Paper beats Rock.")
+            alert ("Computer chooses Rock"); alert ("You win! Paper beats Rock.");
             return;
         }
         else {
-            console.log ("You lost! Scissor beats Paper")
+            alert ("Computer chooses Scissors"); alert ("You lost! Scissors beats Paper");
             return;
         }
     }
     if (playerSelection(userChoice) === "ROCK") {
         if (computerSelection(computerChoice) === "SCISSOR") {
-            console.log ("You win! Rock beats Scissor")
+            alert ("Computer chooses Scissor"); alert("You win! Rock beats Scissor");
             return;
         }
         else {
-            console.log ("You lose! Paper beats Rock.")
+            alert ("Computer chooses Paper"); alert ("You lose! Paper beats Rock.");
+            return;
         }
     }
-    if (playerSelection(userChoice) === "SCISSOR") {
+    if (playerSelection(userChoice) === "SCISSORS") {
         if (computerSelection(computerChoice) === "PAPER") {
-            console.log ("You win! Scissor beats Paper");
+            alert ("Computer chooses Paper"); alert ("You win! Scissor beats Paper");
             return;
         }
         else {
-            console.log ("You lose! Rock beats Scissor")
+            alert ("Computer chooses Rock"); alert ("You lose! Rock beats Scissor");
+            return;
         }
-    }}
+    }
+}
+function game (playRound) {
+    let gameCount = 0
+    while (gameCount < 5) {
+    playRound(playerSelection, computerSelection);
+    gameCount++;
+    console.log(gameCount);
+    }
+}
+game(playRound);
