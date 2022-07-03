@@ -9,7 +9,7 @@ WE WANT TO CREATE A SIMPLE "ROCK-PAPER-SCISSORS" FOR USERS TO PLAY AGAINST COMPU
 (ALL ROUNDS ARE PLAYED EVEN IF THERE IS ALREADY A WINNER, I.E A 3-0 IN 3 ROUNDS).*/
 
 
-//2- MAKE A HELPER FUNCTION TO AVOID INVALID INPUTS
+//MAKE A HELPER FUNCTION TO AVOID INVALID INPUTS
 function inputChecker(userChoice) {
     if (userChoice === null || userChoice === "") {
         alert ("No values found. Reload to try again")
@@ -23,7 +23,7 @@ function inputChecker(userChoice) {
         return;
     }
 }
-// 3- CREATE A FUNCTION FOR COMPUTER TO CREATE A RANDOM VALUE BETWEEN: ("PAPER", "ROCK", "SCIZOR")//
+//CREATE A FUNCTION FOR COMPUTER TO CREATE A RANDOM VALUE BETWEEN: ("PAPER", "ROCK", "SCIZOR")//
     function computerChoice () {
     const computerOptions = ['PAPER','ROCK','SCISSORS'];
     const choiceNumber = Math.floor(Math.random()*3);
@@ -31,14 +31,14 @@ function inputChecker(userChoice) {
     return computerPlay;
 }
 
-//4- CREATE TWO FUNCTIONS TO USE FOR COMPARE USER VS COMPUTER //
+//CREATE TWO FUNCTIONS TO USE FOR COMPARE USER VS COMPUTER //
 function playerSelection (userChoice){
     return userChoice;
 }
 function computerSelection (computerChoice) {
     return computerChoice();
 }
-//5- CREATE MAIN ROUND FUNCTION
+//CREATE ROUND FUNCTION
 function playRound (playerSelection, computerSelection) {
     //1- CREATE A VARIABLE AND STORE USER INPUT IN IT.//
     let userChoice = prompt("Paper, Rock or Scissors?" , "");
@@ -54,40 +54,62 @@ function playRound (playerSelection, computerSelection) {
     if ( playerSelection(userChoice) === "PAPER") {
         if (computerSelection(computerChoice) === "ROCK") {
             alert ("Computer chooses Rock"); alert ("You win! Paper beats Rock.");
-            return;
+            return true;
         }
         else {
             alert ("Computer chooses Scissors"); alert ("You lost! Scissors beats Paper");
-            return;
+            return false;
         }
     }
     if (playerSelection(userChoice) === "ROCK") {
         if (computerSelection(computerChoice) === "SCISSOR") {
             alert ("Computer chooses Scissor"); alert("You win! Rock beats Scissor");
-            return;
+            return true;
         }
         else {
             alert ("Computer chooses Paper"); alert ("You lose! Paper beats Rock.");
-            return;
+            return false;
         }
     }
     if (playerSelection(userChoice) === "SCISSORS") {
         if (computerSelection(computerChoice) === "PAPER") {
             alert ("Computer chooses Paper"); alert ("You win! Scissor beats Paper");
-            return;
+            return true;
         }
         else {
             alert ("Computer chooses Rock"); alert ("You lose! Rock beats Scissor");
-            return;
+            return false
         }
     }
 }
+//CREATE
 function game (playRound) {
-    let gameCount = 0
+    let gameCount = 0;
+    let playerScore = 0;
+    let computerScore = 0;
     while (gameCount < 5) {
-    playRound(playerSelection, computerSelection);
+    switch (playRound(playerSelection, computerSelection)) {
+        case true: 
+        playerScore++;
+        alert (`Player ${playerScore} - ${computerScore} Computer`);
+        break;
+        case false: 
+        computerScore++;
+        alert (`Player ${playerScore} - ${computerScore} Computer`)
+        break;
+        default:
+        alert (`Player ${playerScore} - ${computerScore} Computer`)
+    }
     gameCount++;
-    console.log(gameCount);
+    }
+    if (playerScore > computerScore) {
+        alert (`You won ${playerScore} - ${computerScore}`)
+    }
+    else if (computerScore === playerScore) {
+        alert (`It's a ${playerScore} - ${computerScore} draw`)
+    }
+    else {
+        alert (`You lost ${playerScore} - ${computerScore}`)
     }
 }
 game(playRound);
